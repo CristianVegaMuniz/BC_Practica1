@@ -2,19 +2,18 @@
 
 pragma solidity ^0.8.10;
 
-import "./nftListing.sol";
+import "./purchaseListing.sol";
 import "./auction.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract NFTMarket is Ownable {
 
-    mapping(uint256 => PurchaseListing) public listings; // Listings available for purchase
+    mapping(uint256 => PurchaseListing) public listings;
     mapping(uint256 => address) public auctions;
 
     event AuctionCreated(address auctionContract, uint256 nftId);
     event NFTListedForSale(address seller, uint256 nftId, uint256 price);
-    event NFTPurchased(address buyer, uint256 nftId, uint256 price);
 
     constructor(address initialOwner) Ownable(initialOwner) {}
 
