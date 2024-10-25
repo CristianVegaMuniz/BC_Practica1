@@ -11,6 +11,8 @@ contract PurchaseListing is Ownable {
     uint256 public nftId;
     uint256 public price;
     address public sellerAddress;
+    address public buyerAddress;
+
 
     event NFTPurchased(address buyer, uint256 nftId, uint256 price);
 
@@ -33,7 +35,7 @@ contract PurchaseListing is Ownable {
         require(msg.value == price, "Funds are not the exact price to purchase the NFT");
         nftContract.safeTransferFrom(sellerAddress, msg.sender, nftId);
         payable(sellerAddress).transfer(msg.value);
-
+        buyerAddress=msg.sender;
         emit NFTPurchased(msg.sender, nftId, price);
     }
 }
